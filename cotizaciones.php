@@ -1,0 +1,74 @@
+<?php
+include("conexion.php");
+
+$sql = "SELECT * FROM cotizaciones";
+$resultado = mysqli_query($conexion, $sql);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cotizaciones</title>
+    <link rel="stylesheet" href="Estilo.css">
+</head>
+<body>
+
+<header>
+    <h1>Cotizaciones Registradas</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="Index.php">Inicio</a></li>
+        <li><a href="obras.php">Obras</a></li>
+        <li><a href="contacto.php">Contacto</a></li>
+        <li><a href="cotizaciones.php">Cotizaciones</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<div class="tarjeta">
+
+<h2>Listado de Cotizaciones</h2>
+
+<table border="1" width="100%">
+
+<tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Cantidad de Personas</th>
+    <th>Fecha</th>
+    <th>Editar</th>
+    <th>Eliminar</th>
+</tr>
+
+<?php
+
+while($fila = mysqli_fetch_assoc($resultado))
+{
+   echo "<tr>";
+
+echo "<td>".$fila['Id']."</td>";
+echo "<td>".$fila['Nombre']."</td>";
+echo "<td>".$fila['Personas']."</td>";
+echo "<td>".$fila['Fecha']."</td>";
+
+echo "<td><a href='editar.php?id=".$fila['Id']."'>Editar</a></td>";
+
+echo "<td><a href='eliminar.php?id=".$fila['Id']."'>Eliminar</a></td>";
+
+echo "</tr>";
+}
+
+?>
+
+</table>
+
+</div>
+
+</main>
+
+</body>
+</html>
